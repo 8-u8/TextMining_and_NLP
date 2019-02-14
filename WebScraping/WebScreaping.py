@@ -30,7 +30,8 @@ def scraper(wikiTitle):
     soup = bs4.BeautifulSoup(html, "html.parser")
     # wikipediaから得られたソースコードから適当名部分を抜いてくる
     # "<p></p>"を持ってくると間違いなさそう。あとはここから「○○映画」などを抜いてくれば……
-    TitleIndex = soup.find("ul",attrs = {"ここにWikipediaのhtmlからそれっぽいものを持ってくる．"})
+    # <table>か？
+    TitleIndex = soup.find("ul",attrs = {"<table><tbody>"})
     Description = TitleIndex.find_all("span", attrs = {"a","b"})
     for description in Description:
         print(description.contents[0], description.span.string)
